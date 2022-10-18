@@ -1,26 +1,20 @@
 func isAnagram(s string, t string) bool {
     
-    if len(s) != len(t) {
+    	if len(s) != len(t) {
 		return false
 	}
-	characterCounter := make(map[string]int)
-	compareCharacterCounter := make(map[string]int)
-	firstArray := strings.Split(s, "")
-	lastArray := strings.Split(t, "")
-
-	for _, character := range firstArray {
-		characterCounter[character] = characterCounter[character] + 1
+	chars := [26]int{}
+	for i := 0; i < len(s); i++ {
+		chars[int(s[i]-'a')]++
+		chars[int(t[i]-'a')]--
 	}
-
-	for _, character := range lastArray {
-		compareCharacterCounter[character] = compareCharacterCounter[character] + 1
-	}
-
-	for key, element := range characterCounter {
-		if compareCharacterCounter[key] != element {
+	
+	for i := 0; i < 26; i++ {
+		if chars[i] != 0 {
 			return false
 		}
 	}
 
+	
 	return true
 }
